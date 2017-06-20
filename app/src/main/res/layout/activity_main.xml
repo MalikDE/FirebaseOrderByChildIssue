@@ -40,6 +40,14 @@
             android:text="Add a score"/>
 
         <Button
+            android:id="@+id/completion_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Completion"/>
+
+
+        <Button
             android:id="@+id/clear_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

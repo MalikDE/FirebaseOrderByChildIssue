@@ -13,20 +13,19 @@ import com.google.firebase.database.ValueEventListener;
 
 /**
  * This little snippet highlight a bug in Firebase related to persistence.
- *
+ * <p>
  * 1. Clear database (using clear button)
  * 2. uninstall and install app
  * 3. Display all DB (using GET ALL button) => empty (OK)
  * 4. Display "last score" (using GET LAST SCORES button)
  * 5. Add a score (user1, 1)
  * 6. Display 'last score' => (user1, 1) => OK
- *
+ * <p>
  * 8. uninstall and install app
  * 9.  Display "last score" => (user1, 1) => OK
  * 10. Add 3 new scores
  * 11. Display all DB (using GET ALL button)  => (user1, 1), (user2, 2), (user3, 3) => OK
  * 12.  Display "last score" => (user1, 1) => NOK
- *
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -95,6 +94,45 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 scoresReference.setValue(null);
+            }
+        });
+
+        findViewById(R.id.completion_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scoresReference.orderByChild("score").limitToLast(3)
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                System.out.println("1. Best 3 scores  : " + dataSnapshot);
+                                scoresReference.child("user32").child("score").setValue(32,
+                                        new DatabaseReference.CompletionListener() {
+                                            @Override
+                                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                                System.out.println("User added : user32" + ", score:" + 32);
+
+                                                scoresReference.orderByChild("score").limitToLast(3)
+                                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                System.out.println("2. Best 3 scores  : " + dataSnapshot);
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(DatabaseError databaseError) {
+
+                                                            }
+                                                        });
+
+                                            }
+                                        });
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
             }
         });
     }
