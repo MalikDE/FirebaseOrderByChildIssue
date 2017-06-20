@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1072163522983",
+    "firebase_url": "https://test-b2871.firebaseio.com",
+    "project_id": "test-b2871",
+    "storage_bucket": "test-b2871.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072163522983:android:9cdf27d10999603c",
+        "android_client_info": {
+          "package_name": "com.woowstudio.firebasetest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072163522983-hbtb3rvms3ieb7rlbober6pvk7cij535.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLjyGim3f-efRygkhfz8N2-N7GuWsNleg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
